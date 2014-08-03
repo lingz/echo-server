@@ -1,22 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hello React</title>
+    <title>Echo voice recording</title>
 
+    <link rel="stylesheet" href="foundation.css">
     <style>
 
-    body, html{
-
-      font-family: sans-serif;
-
-
-    }
-
     #container{
-      margin: 2em auto;
-      width: 75%;
+      min-height: 25em;
     }
-
     .soundbite{
       padding: 0.5em;
       display: inline-block;
@@ -27,10 +19,12 @@
 
     }
     .soundbite:hover:after{
-      content: 'click for audio';
+      content: "click on text for audio";
       position: absolute;
       display: block;
-      margin-top: -3em;
+      margin-top: -5em;
+      margin-left: -12em;
+      padding: 0.5em;
     }
 
     </style>
@@ -38,8 +32,11 @@
     <script src="react.js"></script>
     <script src="JSXTransformer.js"></script>
   </head>
-  <body>
-    <div id="container"></div>
+  <body class="row">
+    <h1>Echo<img src="sound-symbol.jpg" width="100"/></h1>
+    <div id="container" class="panel">
+      <img src="loading.gif" width="100"> loading...
+    </div>
 
     <script src="https://cdn.firebase.com/js/client/1.0.18/firebase.js"></script>
 

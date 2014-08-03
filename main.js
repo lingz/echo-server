@@ -35,11 +35,12 @@ var SentenceDisplay = React.createClass({
         fragments = [];
         for (var id in this.props.fragment){
           if (this.props.fragment.hasOwnProperty(id)){
-            fragments.push(<p className="soundbite" id={id} onClick={this.handleClick}>{this.props.fragment[id]}</p>);
+            if (typeof(this.props.fragment[id]) !== 'object')
+              fragments.push(<p className="soundbite" id={id} onClick={this.handleClick}>{this.props.fragment[id]}</p>);
           }
         }
         return (
-          <div>{fragments.slice(0,-1)}</div>
+          <div>{fragments}</div>
         )
 
   }
@@ -64,12 +65,17 @@ fireBOutputRef.on("value", function (snapshot) {
   console.log(snapshot.val());
   for (var id in snapshot.val()){
     if (snapshot.val().hasOwnProperty(id)){
-      addToTranscript(snapshot.val()[id]['text'], id);
+      
 
       var soundbite_id = snapshot.val()[id]['dataId'];
       SOUND_BITES[id] = soundbite_id;
-      fireBDataRef.child(soundbite_id).once("value", function (snapshot) {
+      // fireBDataRef.on("value", function (snapshot) {
+      //   console.log("data", snapshot.val());
+      // });
+      var text_data = snapshot.val();
+      fireBDataRef.child(soundbite_id).on("value", function (snapshot) {
         SOUND_ID_TO_SOUND_ENCODED_STRING[soundbite_id] = snapshot.val();
+        addToTranscript(text_data[id]['text'], id);
       });
     }
   }
@@ -80,8 +86,3 @@ function playdasong (base64_sound_encoding) {
     var snd = new Audio("data:audio/wav;base64," + base64_sound_encoding);
     snd.play();
 }
-
-// myFirebaseRef.child("ABCD").child("admin").child("0").on("value", function(snapshot) {
-//   playdasong(snapshot.val());
-
-// });
