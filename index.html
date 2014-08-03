@@ -2,11 +2,44 @@
 <html>
   <head>
     <title>Hello React</title>
+
+    <style>
+
+    body, html{
+
+      font-family: sans-serif;
+
+
+    }
+
+    #container{
+      margin: 2em auto;
+      width: 75%;
+    }
+
+    .soundbite{
+      padding: 0.5em;
+      display: inline-block;
+    }
+    .soundbite:hover{
+      background: #ccc;
+      cursor: pointer;
+
+    }
+    .soundbite:hover:after{
+      content: 'click for audio';
+      position: absolute;
+      display: block;
+      margin-top: -3em;
+    }
+
+    </style>
+
     <script src="react.js"></script>
     <script src="JSXTransformer.js"></script>
   </head>
   <body>
-    <div id="example"></div>
+    <div id="container"></div>
 
     <script src="https://cdn.firebase.com/js/client/1.0.18/firebase.js"></script>
 
